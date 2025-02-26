@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>Bienvenido al banco BCG</h1>
+            <div class="opciones">
+                <button id="crear-cuenta" onclick="window.location.href='crear_cuenta.html'">Crear cuenta</button>
+                <button id="entrar-cuenta" onclick="window.location.href='entrar.html'">Entrar a la cuenta</button>
+                <button od="Borrar-Cuenta" onclick="window.location.href='borrar.html'">borrar una cuenta</button>
+                <h1>Precio del Dólar en MXN</h1>
+    <p id="precioDolar">Cargando...</p>
+    <p id="fechaActualizacion"></p>
+
+    <script>
+        async function obtenerPrecioDolar() {
+            try {
+                const response = await fetch("http://localhost:5001/dolar"); // Ajusta el puerto si es necesario
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById("precioDolar").innerText = `1 USD = ${data.precioDolar} MXN`;
+                    document.getElementById("fechaActualizacion").innerText = `Última actualización: ${data.fecha}`;
+                } else {
+                    document.getElementById("precioDolar").innerText = "Error al obtener el precio.";
+                }
+            } catch (error) {
+                console.error("Error al obtener el precio del dólar:", error);
+                document.getElementById("precioDolar").innerText = "No se pudo cargar el precio.";
+            }
+        }
+
+        obtenerPrecioDolar(); // Llamar la función cuando se cargue la página
+    </script>
+
+            </div>
+
+            
+        </div>
+    </main>
+
+<script src="index.js"></script>
+</body>
+</html>
