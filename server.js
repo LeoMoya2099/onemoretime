@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 
 // Ruta para obtener el valor del dólar
-app.get("/dolar", async (req, res) => {
+app.get("/api/dolar", async (req, res) => {
   try {
     const API_KEY = "929be70cef5bb0c8b3d28a0c";
     const response = await axios.get(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
@@ -62,7 +62,7 @@ app.get("/dolar", async (req, res) => {
 });
 
 // Rutas de usuario
-app.post('/check-balance', async (req, res) => {
+app.post('/api/check-balance', async (req, res) => {
   const { email } = req.body;
 
   try {
@@ -76,7 +76,7 @@ app.post('/check-balance', async (req, res) => {
   }
 });
 
-app.post('/deposit', async (req, res) => {
+app.post('/api/deposit', async (req, res) => {
   const { email, amount } = req.body;
 
   if (!amount || amount <= 0) return res.status(400).send({ error: 'Cantidad inválida' });
@@ -94,7 +94,7 @@ app.post('/deposit', async (req, res) => {
   }
 });
 
-app.post('/withdraw', async (req, res) => {
+app.post('/api/withdraw', async (req, res) => {
   const { email, amount } = req.body;
 
   if (!amount || amount <= 0) return res.status(400).send({ error: 'Cantidad inválida' });
@@ -114,7 +114,7 @@ app.post('/withdraw', async (req, res) => {
   }
 });
 
-app.post('/registro', async (req, res) => {
+app.post('/api/registro', async (req, res) => {
   const { nombre, apellido, email, contraseña } = req.body;
 
   try {
@@ -127,7 +127,7 @@ app.post('/registro', async (req, res) => {
   }
 });
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { email, contraseña } = req.body;
 
   try {
